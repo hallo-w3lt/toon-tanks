@@ -11,33 +11,36 @@ ABasePawn::ABasePawn()
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
-	RootComponent = CapsuleComponent;
+	CapsuleComponent2 = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
+	RootComponent = CapsuleComponent2;
 
-	TankBaseComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tank Base"));
-	TankBaseComponent->SetupAttachment(RootComponent);
+	TankBaseComponent2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TankBase"));
+	TankBaseComponent2->SetupAttachment(RootComponent);
 
-	TankTurretComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Tank Turret"));
-	TankTurretComponent->SetupAttachment(TankBaseComponent);
+	TankTurretComponent2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TankTurret"));
+	TankTurretComponent2->SetupAttachment(TankBaseComponent2);
 
-	ProjectileComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Point"));
-	ProjectileComponent->SetupAttachment(TankTurretComponent);
+	ProjectileComponent2 = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectilePoint"));
+	ProjectileComponent2->SetupAttachment(TankTurretComponent2);
 }
 
-// Called when the game starts or when spawned
 void ABasePawn::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-// Called every frame
 void ABasePawn::Tick(const float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-// Called to bind functionality to input
-void ABasePawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ABasePawn::RotateTurret(const FVector LookAtTarget)
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	const FVector ToTarget = LookAtTarget - TankTurretComponent2->GetComponentLocation();
+	const FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
+
+	TankTurretComponent2->SetWorldRotation(FMath::RInterpConstantTo(TankTurretComponent2->GetComponentRotation(),
+	                                                                LookAtRotation,
+	                                                                GetWorld()->GetDeltaSeconds(),
+	                                                                350.f));
 }

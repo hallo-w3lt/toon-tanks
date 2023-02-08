@@ -4,6 +4,7 @@
 #include "Pawns/BasePawn.h"
 
 #include "Components/CapsuleComponent.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -34,7 +35,7 @@ void ABasePawn::Tick(const float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void ABasePawn::RotateTurret(const FVector LookAtTarget)
+void ABasePawn::RotateTurret(const FVector LookAtTarget) const
 {
 	const FVector ToTarget = LookAtTarget - TankTurretComponent2->GetComponentLocation();
 	const FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
@@ -43,4 +44,18 @@ void ABasePawn::RotateTurret(const FVector LookAtTarget)
 	                                                                LookAtRotation,
 	                                                                GetWorld()->GetDeltaSeconds(),
 	                                                                350.f));
+}
+
+void ABasePawn::Fire()
+{
+	FVector ProjectileLocation = ProjectileComponent2->GetComponentLocation();
+	
+	DrawDebugSphere(GetWorld(),
+	                ProjectileLocation,
+	                25.f,
+	                10.f,
+	                FColor::Yellow,
+	                false,
+	                3.f
+	);
 }

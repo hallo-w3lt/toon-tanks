@@ -23,7 +23,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 protected:
-	virtual void RotateTurret(FVector LookAtTarget);
+	void RotateTurret(FVector LookAtTarget) const;
+	void Fire();	
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "components", meta = (AllowPrivateAccess = "true"))

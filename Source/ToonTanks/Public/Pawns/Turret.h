@@ -30,4 +30,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Ranges", meta=(AllowPrivateAccess="true"))
 	float FireRange = 300.f;
+
+	FTimerHandle FireRateTimerHandle;
+	float FireRate = 2.f;
+
+	void CheckFireCondition();
+	bool InFireRange() const;
 };

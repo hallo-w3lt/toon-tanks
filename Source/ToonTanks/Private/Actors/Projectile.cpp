@@ -2,28 +2,22 @@
 
 
 #include "Actors/Projectile.h"
+#include "Components/StaticMeshComponent.h"
 
-// Sets default values
 AProjectile::AProjectile()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	ProjectileComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileComponent"));
 	RootComponent = ProjectileComponent;
 }
 
-// Called when the game starts or when spawned
 void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
-// Called every frame
-void AProjectile::Tick(float DeltaTime)
+void AProjectile::Tick(const float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
-

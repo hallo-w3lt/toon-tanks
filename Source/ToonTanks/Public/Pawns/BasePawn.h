@@ -24,7 +24,7 @@ public:
 
 protected:
 	void RotateTurret(FVector LookAtTarget) const;
-	void Fire();	
+	void Fire();
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "components", meta = (AllowPrivateAccess = "true"))
@@ -38,4 +38,7 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileComponent2 = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Class Types", meta=(AllowPrivateAccess= "true"))
+	TSubclassOf<class AProjectile> ProjectileClass = nullptr;
 };

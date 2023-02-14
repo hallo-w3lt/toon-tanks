@@ -14,6 +14,8 @@ ATank::ATank()
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("UCameraComponet"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
+
+	// AddComponent(HealthComponent);
 }
 
 

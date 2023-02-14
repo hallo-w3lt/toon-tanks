@@ -39,6 +39,6 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "components", meta = (AllowPrivateAccess = "true"))
 	USceneComponent* ProjectileComponent2 = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="Class Types", meta=(AllowPrivateAccess= "true"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="combat", meta=(AllowPrivateAccess= "true"))
 	TSubclassOf<class AProjectile> ProjectileClass = nullptr;
 };

@@ -42,6 +42,9 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* CameraComponent = nullptr;
 
+	// UPROPERTY(VisiblrAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	// class UHealthComponent* HealthComponent = nullptr;
+
 	void Move(float Val);
 	void Turn(float Val);
 };

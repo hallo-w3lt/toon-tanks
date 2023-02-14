@@ -5,11 +5,10 @@
 
 #include "Components/CapsuleComponent.h"
 #include "DrawDebugHelpers.h"
+#include "Actors/Projectile.h"
 
-// Sets default values
 ABasePawn::ABasePawn()
 {
-	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	CapsuleComponent2 = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
@@ -41,21 +40,30 @@ void ABasePawn::RotateTurret(const FVector LookAtTarget) const
 	const FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
 
 	TankTurretComponent2->SetWorldRotation(FMath::RInterpConstantTo(TankTurretComponent2->GetComponentRotation(),
-	                                                                LookAtRotation,
-	                                                                GetWorld()->GetDeltaSeconds(),
-	                                                                350.f));
+		LookAtRotation,
+		GetWorld()->GetDeltaSeconds(),
+		350.f));
 }
 
 void ABasePawn::Fire()
 {
+	if (nullptr == GetWorld()) { return; }
+	if (nullptr == ProjectileClass) { return; }
+
 	FVector ProjectileLocation = ProjectileComponent2->GetComponentLocation();
-	
+	FRotator ProjectileRotation = ProjectileComponent2->GetComponentRotation();
+
 	DrawDebugSphere(GetWorld(),
-	                ProjectileLocation,
-	                25.f,
-	                10.f,
-	                FColor::Yellow,
-	                false,
-	                3.f
+		ProjectileLocation,
+		25.f,
+		10.f,
+		FColor::Yellow,
+		false,
+		3.f
 	);
+
+	if (auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, ProjectileLocation, ProjectileRotation); Projectile != nullptr) 
+	{
+		Projectile->SetOwner(this);
+	}
 }

@@ -22,6 +22,8 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void HandleDestruction();
+
 protected:
 	void RotateTurret(FVector LookAtTarget) const;
 	void Fire();

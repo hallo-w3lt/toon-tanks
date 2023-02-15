@@ -34,6 +34,11 @@ void ABasePawn::Tick(const float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
+void ABasePawn::HandleDestruction()
+{
+	// TODO: Visual/Sound FX
+}
+
 void ABasePawn::RotateTurret(const FVector LookAtTarget) const
 {
 	const FVector ToTarget = LookAtTarget - TankTurretComponent2->GetComponentLocation();

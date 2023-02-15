@@ -24,6 +24,8 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void HandleDestruction() override;
+
 private:
 	UPROPERTY()
 	class ATank* Tank = nullptr;

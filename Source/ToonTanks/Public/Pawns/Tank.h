@@ -26,6 +26,8 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void HandleDestruction() override;
+
 private:
 	UPROPERTY(EditAnywhere, Category="Movements", meta = (AllowPrivateAccess = "true"))
 	float Speed = 400.f;
@@ -47,4 +49,7 @@ private:
 
 	void Move(float Val);
 	void Turn(float Val);
+
+public:
+	FORCEINLINE APlayerController* GetPlayerController() { return PlayerController; }
 };

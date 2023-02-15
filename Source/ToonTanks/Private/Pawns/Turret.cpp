@@ -32,6 +32,12 @@ void ATurret::Tick(const float DeltaTime)
 	}
 }
 
+void ATurret::HandleDestruction()
+{
+	Super::HandleDestruction();
+	Destroy();
+}
+
 void ATurret::CheckFireCondition()
 {
 	if (InFireRange())

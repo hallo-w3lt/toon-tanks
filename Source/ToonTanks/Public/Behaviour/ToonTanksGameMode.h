@@ -28,6 +28,10 @@ private:
 	UPROPERTY()
 	class ATank* Tank = nullptr;
 
+	UPROPERTY()
 	class AToonTanksPlayerController* PlayerController = nullptr;
 
+	float StartDelay = 3.f;
+
+	void HandleGameStart();
 };

@@ -29,7 +29,9 @@ public:
 	virtual void HandleDestruction() override;
 
 private:
-	UPROPERTY(EditAnywhere, Category="Movements", meta = (AllowPrivateAccess = "true"))
+	bool bAlive = true;
+
+	UPROPERTY(EditAnywhere, Category = "Movements", meta = (AllowPrivateAccess = "true"))
 	float Speed = 400.f;
 
 	UPROPERTY(EditAnywhere, Category = "Movements", meta = (AllowPrivateAccess = "true"))
@@ -38,7 +40,7 @@ private:
 	UPROPERTY()
 	APlayerController* PlayerController = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Components", meta=(AllowPrivateAccess="true"))
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* SpringArmComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -51,5 +53,6 @@ private:
 	void Turn(float Val);
 
 public:
+	FORCEINLINE bool IsAlive() { return bAlive; }
 	FORCEINLINE APlayerController* GetPlayerController() { return PlayerController; }
 };

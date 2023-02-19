@@ -29,18 +29,28 @@ protected:
 	void Fire();
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "components", meta = (AllowPrivateAccess = "true"))
-	class UCapsuleComponent* CapsuleComponent2 = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		class UCapsuleComponent* CapsuleComponent2 = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="components", meta=(AllowPrivateAccess = "true"))
-	UStaticMeshComponent* TankBaseComponent2 = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		UStaticMeshComponent* TankBaseComponent2 = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "components", meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* TankTurretComponent2 = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		UStaticMeshComponent* TankTurretComponent2 = nullptr;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "components", meta = (AllowPrivateAccess = "true"))
-	USceneComponent* ProjectileComponent2 = nullptr;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+		USceneComponent* ProjectileComponent2 = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category="combat", meta=(AllowPrivateAccess= "true"))
-	TSubclassOf<class AProjectile> ProjectileClass = nullptr;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+		TSubclassOf<class AProjectile> ProjectileClass = nullptr;
+
+
+	UPROPERTY(EditAnywhere, Category = "FX", meta = (AllowPrivateAccess = "true"))
+		class UParticleSystem* DeathParticle = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "Sound")
+		class USoundBase* DeathSound = nullptr;
+
+	UPROPERTY(EditAnywhere, Category = "Camera Shake")
+		TSubclassOf<class UCameraShakeBase> DeathCameraShakeClass;
 };

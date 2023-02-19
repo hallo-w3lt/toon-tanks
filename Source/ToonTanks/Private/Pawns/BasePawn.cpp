@@ -6,6 +6,8 @@
 #include "Components/CapsuleComponent.h"
 #include "DrawDebugHelpers.h"
 #include "Actors/Projectile.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ABasePawn::ABasePawn()
 {
@@ -36,7 +38,20 @@ void ABasePawn::Tick(const float DeltaTime)
 
 void ABasePawn::HandleDestruction()
 {
-	// TODO: Visual/Sound FX
+	if (DeathParticle != nullptr)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, DeathParticle, GetActorLocation(), GetActorRotation());
+	}
+
+	if (DeathSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation(), GetActorRotation());
+	}	
+
+	if (DeathCameraShakeClass != nullptr)
+	{
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShakeClass);
+	}
 }
 
 void ABasePawn::RotateTurret(const FVector LookAtTarget) const
@@ -58,16 +73,16 @@ void ABasePawn::Fire()
 	FVector ProjectileLocation = ProjectileComponent2->GetComponentLocation();
 	FRotator ProjectileRotation = ProjectileComponent2->GetComponentRotation();
 
-	DrawDebugSphere(GetWorld(),
-		ProjectileLocation,
-		25.f,
-		10.f,
-		FColor::Yellow,
-		false,
-		3.f
-	);
+	// DrawDebugSphere(GetWorld(),
+	// 	ProjectileLocation,
+	// 	25.f,
+	// 	10.f,
+	// 	FColor::Yellow,
+	// 	false,
+	// 	3.f
+	// );
 
-	if (auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, ProjectileLocation, ProjectileRotation); Projectile != nullptr) 
+	if (AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, ProjectileLocation, ProjectileRotation); Projectile != nullptr)
 	{
 		Projectile->SetOwner(this);
 	}

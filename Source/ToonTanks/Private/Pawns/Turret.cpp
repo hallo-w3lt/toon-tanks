@@ -49,5 +49,5 @@ void ATurret::CheckFireCondition()
 bool ATurret::InFireRange() const
 {
 	if (nullptr == Tank) { return false; }
-	return FVector::Dist(GetActorLocation(), Tank->GetActorLocation()) <= FireRange;
+	return FVector::Dist(GetActorLocation(), Tank->GetActorLocation()) <= FireRange && Tank->IsAlive();
 }

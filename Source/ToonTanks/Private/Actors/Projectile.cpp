@@ -6,6 +6,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "GameFramework/DamageType.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 AProjectile::AProjectile()
 {
@@ -13,6 +14,9 @@ AProjectile::AProjectile()
 
 	ProjectileComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileComponent"));
 	RootComponent = ProjectileComponent;
+
+	ParticleTrail = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleTrail"));
+	ParticleTrail->SetupAttachment(RootComponent);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->MaxSpeed = 1300.f;
@@ -24,6 +28,11 @@ void AProjectile::BeginPlay()
 	Super::BeginPlay();
 
 	ProjectileComponent->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+
+	if (LaunchSound != nullptr)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation(), GetActorRotation());
+	}
 }
 
 void AProjectile::Tick(const float DeltaTime)
@@ -42,13 +51,27 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent,
 
 	// auto Instigator = Owner->GetInstigatorController();
 
-	auto DamageTypeClass = UDamageType::StaticClass();
+	UClass* DamageTypeClass = UDamageType::StaticClass();
 
 	if (OtherActor != nullptr && OtherActor != this && OtherActor != GetOwner())
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, GetOwner()->GetInstigatorController(), this, DamageTypeClass);
-		Destroy();
+
+		if (HitParticles != nullptr)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
+
+			if (HitSound != nullptr)
+			{
+				UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation(), GetActorRotation());
+			}
+
+			if (HitCameraShakeClass != nullptr)
+			{
+				GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitCameraShakeClass);
+			}
+		}
 	}
-	
-	// UE_LOG(LogTemp, Warning, TEXT("OtherActor %s"), *OtherActor->GetName());
+
+	Destroy();
 }

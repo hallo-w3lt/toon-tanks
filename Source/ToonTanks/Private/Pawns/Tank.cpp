@@ -23,15 +23,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 
-	PlayerController = Cast<APlayerController>(GetController());
-
-	// DrawDebugSphere(GetWorld(),
-	//                 GetActorLocation() + FVector(0.f, 0.f, 200.f),
-	//                 100.f,
-	//                 10,
-	//                 FColor::Red,
-	//                 true,
-	//                 5.f);
+	PlayerController = Cast<APlayerController>(GetController());	
 }
 
 void ATank::Tick(const float DeltaTime)
@@ -43,13 +35,13 @@ void ATank::Tick(const float DeltaTime)
 	FHitResult HitResult;
 	PlayerController->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
 
-	DrawDebugSphere(GetWorld(),
-	                HitResult.ImpactPoint,
-	                25.f,
-	                10,
-	                FColor::Red,
-	                false,
-	                -1.f);
+	// DrawDebugSphere(GetWorld(),
+	//                 HitResult.ImpactPoint,
+	//                 25.f,
+	//                 10,
+	//                 FColor::Red,
+	//                 false,
+	//                 -1.f);
 
 	RotateTurret(HitResult.ImpactPoint);
 }
@@ -69,6 +61,7 @@ void ATank::HandleDestruction()
 	Super::HandleDestruction();
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	bAlive = false;
 }
 
 void ATank::Move(const float Val)

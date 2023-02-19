@@ -44,8 +44,5 @@ void UHealthComponent::DamageTaken(AActor* DamagedActor, float Damage, const UDa
 		ToonTanksGameMode->ActorDied(DamagedActor);
 	}
 
-	// UE_LOG(LogTemp, Warning, TEXT("On Damaged %f"), Health);
-	//UE_LOG(LogTemp, Warning, TEXT("On Damaged"));	
-	// if (nullptr == Instigator) { return; }
-	// UE_LOG(LogTemp, Warning, TEXT("Instigator: %s"), *Instigator->GetName());
+	// UE_LOG(LogTemp, Warning, TEXT("On Damaged %f"), Health);	
 }

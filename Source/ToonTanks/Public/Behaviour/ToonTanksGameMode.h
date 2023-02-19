@@ -21,6 +21,12 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartGame();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void GameOver(bool bWonGame);
+
 public:
 	void ActorDied(AActor* DeadActor);
 
@@ -32,6 +38,8 @@ private:
 	class AToonTanksPlayerController* PlayerController = nullptr;
 
 	float StartDelay = 3.f;
-
 	void HandleGameStart();
+	
+	int32 Towers = 0;
+	int32 GetTowerCount();	
 };

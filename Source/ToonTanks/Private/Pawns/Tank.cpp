@@ -1,10 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 
 #include "Pawns/Tank.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/HealthComponent.h"
 #include "DrawDebugHelpers.h"
 
 ATank::ATank()
@@ -14,8 +15,8 @@ ATank::ATank()
 
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("UCameraComponet"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
-
-	// AddComponent(HealthComponent);
+	
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComponent"));
 }
 
 
@@ -67,8 +68,7 @@ void ATank::HandleDestruction()
 void ATank::Move(const float Val)
 {
 	FVector DeltaLocation = FVector::ZeroVector;
-	DeltaLocation.X = Val * Speed * GetWorld()->GetDeltaSeconds();
-	// DeltaLocation.X = Val * Speed * UGameplayStatics::GetWorldDeltaSeconds(this);
+	DeltaLocation.X = Val * Speed * GetWorld()->GetDeltaSeconds();	
 
 	AddActorLocalOffset(DeltaLocation, true);
 }

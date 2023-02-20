@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 #pragma once
 
@@ -10,7 +10,7 @@
  * GameMode Class
  */
 UCLASS()
-class TOONTANKS_API AToonTanksGameMode : public AGameModeBase
+class TOONTANKS_API AToonTanksGameMode final : public AGameModeBase
 {
 	GENERATED_BODY()
 
@@ -39,7 +39,7 @@ private:
 
 	float StartDelay = 3.f;
 	void HandleGameStart();
-	
+
 	int32 Towers = 0;
-	int32 GetTowerCount();	
+	int32 GetTowerCount();
 };

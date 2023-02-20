@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "Projectile.generated.h"
 
 UCLASS()
-class TOONTANKS_API AProjectile : public AActor
+class TOONTANKS_API AProjectile final : public AActor
 {
 	GENERATED_BODY()
 

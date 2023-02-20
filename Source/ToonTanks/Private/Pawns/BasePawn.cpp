@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 
 #include "Pawns/BasePawn.h"
@@ -13,17 +13,17 @@ ABasePawn::ABasePawn()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	CapsuleComponent2 = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
-	RootComponent = CapsuleComponent2;
+	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleCollider"));
+	RootComponent = CapsuleComponent;
 
-	TankBaseComponent2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TankBase"));
-	TankBaseComponent2->SetupAttachment(RootComponent);
+	TankBaseComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TankBase"));
+	TankBaseComponent->SetupAttachment(RootComponent);
 
-	TankTurretComponent2 = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TankTurret"));
-	TankTurretComponent2->SetupAttachment(TankBaseComponent2);
+	TankTurretComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("TankTurret"));
+	TankTurretComponent->SetupAttachment(TankBaseComponent);
 
-	ProjectileComponent2 = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectilePoint"));
-	ProjectileComponent2->SetupAttachment(TankTurretComponent2);
+	ProjectileComponent = CreateDefaultSubobject<USceneComponent>(TEXT("ProjectilePoint"));
+	ProjectileComponent->SetupAttachment(TankTurretComponent);
 }
 
 void ABasePawn::BeginPlay()
@@ -56,10 +56,10 @@ void ABasePawn::HandleDestruction()
 
 void ABasePawn::RotateTurret(const FVector LookAtTarget) const
 {
-	const FVector ToTarget = LookAtTarget - TankTurretComponent2->GetComponentLocation();
+	const FVector ToTarget = LookAtTarget - TankTurretComponent->GetComponentLocation();
 	const FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
 
-	TankTurretComponent2->SetWorldRotation(FMath::RInterpConstantTo(TankTurretComponent2->GetComponentRotation(),
+	TankTurretComponent->SetWorldRotation(FMath::RInterpConstantTo(TankTurretComponent->GetComponentRotation(),
 		LookAtRotation,
 		GetWorld()->GetDeltaSeconds(),
 		350.f));
@@ -70,8 +70,8 @@ void ABasePawn::Fire()
 	if (nullptr == GetWorld()) { return; }
 	if (nullptr == ProjectileClass) { return; }
 
-	FVector ProjectileLocation = ProjectileComponent2->GetComponentLocation();
-	FRotator ProjectileRotation = ProjectileComponent2->GetComponentRotation();
+	FVector ProjectileLocation = ProjectileComponent->GetComponentLocation();
+	FRotator ProjectileRotation = ProjectileComponent->GetComponentRotation();
 
 	// DrawDebugSphere(GetWorld(),
 	// 	ProjectileLocation,

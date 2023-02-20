@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 
 #include "Actors/Projectile.h"
@@ -44,12 +44,9 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent,
 	AActor* OtherActor,
 	UPrimitiveComponent* OtherComponent,
 	FVector NormalImpulse,
-	const FHitResult& Hit)
-{
-	// auto Owner = GetOwner();
-	if (nullptr == GetOwner()) { return; }
+	const FHitResult& Hit) {
 
-	// auto Instigator = Owner->GetInstigatorController();
+	if (nullptr == GetOwner()) { return; }
 
 	UClass* DamageTypeClass = UDamageType::StaticClass();
 

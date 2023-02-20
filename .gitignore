@@ -75,6 +75,9 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 _ReSharper.Caches/
 
+# Dist
+Dist/
+
 # started content 
 Content/StarterContent/*
 Content/HorrorDiningRoom/*

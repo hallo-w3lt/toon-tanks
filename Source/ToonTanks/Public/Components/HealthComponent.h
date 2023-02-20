@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 #pragma once
 
@@ -8,7 +8,7 @@
 
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
-class TOONTANKS_API UHealthComponent : public UActorComponent
+class TOONTANKS_API UHealthComponent final : public UActorComponent
 {
 	GENERATED_BODY()
 
@@ -23,17 +23,17 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float MaxHealth = 100.f;
-	
+		float MaxHealth = 100.f;
+
 	float Health = 0.f;
 
 	UFUNCTION()
-	void DamageTaken(AActor* DamagedActor,
-					 float Damage,
-					 const UDamageType* DamageType,
-					 class AController* Instigator,
-					 AActor* DamageCause);
+		void DamageTaken(AActor* DamagedActor,
+			float Damage,
+			const UDamageType* DamageType,
+			class AController* Instigator,
+			AActor* DamageCause);
 
 	UPROPERTY()
-	class AToonTanksGameMode* ToonTanksGameMode = nullptr;
+		class AToonTanksGameMode* ToonTanksGameMode = nullptr;
 };

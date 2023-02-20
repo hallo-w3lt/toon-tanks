@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 #pragma once
 
@@ -10,7 +10,7 @@
  * PlayerController Class
  */
 UCLASS()
-class TOONTANKS_API AToonTanksPlayerController : public APlayerController
+class TOONTANKS_API AToonTanksPlayerController final : public APlayerController
 {
 	GENERATED_BODY()
 
@@ -20,5 +20,5 @@ public:
 
 public:
 	void SetPlayerEnabledState(bool bPlayerEnabled);
-	
+
 };

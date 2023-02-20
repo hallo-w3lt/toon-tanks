@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright 2023 @hallo_w3lt. All Rights Reserved. 
 
 #pragma once
 
@@ -30,16 +30,16 @@ protected:
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-		class UCapsuleComponent* CapsuleComponent2 = nullptr;
+		class UCapsuleComponent* CapsuleComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-		UStaticMeshComponent* TankBaseComponent2 = nullptr;
+		UStaticMeshComponent* TankBaseComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-		UStaticMeshComponent* TankTurretComponent2 = nullptr;
+		UStaticMeshComponent* TankTurretComponent = nullptr;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-		USceneComponent* ProjectileComponent2 = nullptr;
+		USceneComponent* ProjectileComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<class AProjectile> ProjectileClass = nullptr;

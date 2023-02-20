@@ -1,2 +1,2 @@
-# Toon anks prototype
+# Toon tanks prototype
 Practical example of a simple prototype.
